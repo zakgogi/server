@@ -64,4 +64,19 @@ module.exports = class Habit{
         })
     };
 
+    static update(data){
+        return new Promise(async(resolve, reject) => {
+            try {
+                const result = await db.query('UPDATE habits SET times_completed = times_completed + 1 WHERE id = $1', [data.id]);
+                if (result.rowCount !== 0){  
+                    resolve('Habit times completed updated successfully');
+                } else {
+                    throw new Error(err);
+                }
+            } catch (err) {
+                reject('Habit times completed could not be updated');
+            }
+        })
+    };
+
 };
