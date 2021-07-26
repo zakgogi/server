@@ -12,8 +12,8 @@ DROP TABLE IF EXISTS habits;
 CREATE TABLE habits (
     id serial PRIMARY KEY, 
     habitname varchar(50) NOT NULL,
-    timesCompleted int NOT NULL, 
-    frequencyDay int, 
+    times_completed int NOT NULL, 
+    frequency_day int NOT NULL, 
     streak int NOT NULL,
     username_id int
     -- frequencyWeek int,
