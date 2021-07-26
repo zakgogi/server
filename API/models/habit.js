@@ -4,11 +4,10 @@ module.exports = class Habit{
     constructor(data){
         this.id = data.id;
         this.habitname = data.habitname;
-        this.timesCompleted = data.timesCompleted;
-        this.frequencyDay = data.frequencyDay;
+        this.times_completed = data.times_completed;
+        this.frequency_day = data.frequency_day;
         this.streak = data.streak;
         this.username_id = data.username_id;
-
     };
     
     static get all(){ 
@@ -23,7 +22,7 @@ module.exports = class Habit{
         })
     };
 
-    static showJoin(id){
+    static showUserHabits(id){
         return new Promise (async (resolve, reject) => {
             try {
                 let habitsData = await db.query(`SELECT habits.*, users.username
@@ -35,6 +34,34 @@ module.exports = class Habit{
                 reject('Habit not found');
             }
         });
+    };
+
+    static create(data){
+        return new Promise (async (resolve, reject) => {
+            try {
+                let habitsData = await db.query('INSERT INTO habits (habitname, times_completed, frequency_day, streak, username_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;', [data.habitname, data.times_completed, data.frequency_day, data.streak, data.username_id]);
+                let habit = new Habit(habitsData.rows[0]);
+                resolve(habit);
+            } catch (err) {
+                
+                reject('Habit cannot be created.');
+            }
+        });
+    };
+
+    static destroy(data){
+        return new Promise(async(resolve, reject) => {
+            try {
+                const result = await db.query('DELETE FROM habits WHERE id = $1', [ data.id ]);
+                if (result.rowCount !== 0){  
+                    resolve('Habit was deleted');
+                } else {
+                    throw new Error(err);
+                }
+            } catch (err) {
+                reject('Habit could not be deleted')
+            }
+        })
     };
 
 };
