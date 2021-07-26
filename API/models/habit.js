@@ -43,7 +43,6 @@ module.exports = class Habit{
                 let habit = new Habit(habitsData.rows[0]);
                 resolve(habit);
             } catch (err) {
-                
                 reject('Habit cannot be created.');
             }
         });
@@ -67,6 +66,7 @@ module.exports = class Habit{
     static update(data){
         return new Promise(async(resolve, reject) => {
             try {
+                //change times_completed + 1 to data.times_completed
                 const result = await db.query('UPDATE habits SET times_completed = times_completed + 1 WHERE id = $1', [data.id]);
                 if (result.rowCount !== 0){  
                     resolve('Habit times completed updated successfully');
