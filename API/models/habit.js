@@ -23,4 +23,18 @@ module.exports = class Habit{
         })
     };
 
+    static showJoin(id){
+        return new Promise (async (resolve, reject) => {
+            try {
+                let habitsData = await db.query(`SELECT habits.*, users.username
+                                                    FROM habits
+                                                    JOIN users on habits.username_id = users.id
+                                                    WHERE username_id = $1;`, [id])
+                resolve (habitsData.rows);
+            } catch (err) {
+                reject('Habit not found');
+            }
+        });
+    };
+
 };

@@ -1,6 +1,6 @@
 const User = require('../models/users');
 
-async function show(req, res){
+async function showAll(req, res){
     try {
         const user = await User.all;
         res.status(200).json(user);
@@ -9,4 +9,6 @@ async function show(req, res){
     }
 };
 
-module.exports = { show };
+
+
+module.exports = { showAll };
