@@ -1,19 +1,28 @@
 {
-  "name": "server",
+  "name": "api",
   "version": "1.0.0",
-  "description": "## Installation",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node API/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zakgogi/server.git"
+    "test": "jest --setupFiles ./tests/Integration/config.js --runInBand --verbose --collectCoverage",
+    "dev": "nodemon -L index.js",
+    "start": "node ./API/index.js"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/zakgogi/server/issues"
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "node-cron": "^3.0.0",
+    "pg": "^8.6.0"
   },
-  "homepage": "https://github.com/zakgogi/server#readme"
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.12",
+    "supertest": "^6.1.4"
+  }
 }
