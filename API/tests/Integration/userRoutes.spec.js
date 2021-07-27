@@ -46,7 +46,6 @@ describe('user and auth endpoints', () => {
             password: 'TestTestTest'
         })
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty("id");
     });
 
     it('prevent login with incorrect password', async () => {

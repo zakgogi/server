@@ -30,7 +30,6 @@ async function login(req, res){
                 });
             }
             jwt.sign(payload, process.env.SECRET, sendToken);
-            
         } else {
             throw new Error('User could not be authenticated')  
         }
