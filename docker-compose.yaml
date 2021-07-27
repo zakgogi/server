@@ -9,7 +9,7 @@ services:
       - PGHOST=db
       - PGPASSWORD=stridePass
       - PGDATABASE=stride
-    #   - DATABASE_URL=postgres://zakgogi:scorepass97@db:5432/scores
+      # - DATABASE_URL=postgres://zakgogi:scorepass97@db:5432/scores
     depends_on:
       - db
     volumes:
