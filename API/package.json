@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --setupFiles ./__tests__/Integration/config.js --verbose --detectOpenHandles",
+    "test": "jest --setupFiles ./tests/Integration/config.js --runInBand --verbose --collectCoverage",
     "dev": "nodemon -L index.js",
     "start": "node index.js"
   },
