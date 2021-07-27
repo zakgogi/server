@@ -2,8 +2,8 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
     id serial PRIMARY KEY,
-    username varchar(255) NOT NULL UNIQUE,
-    email varchar(255) UNIQUE,
+    username varchar(60) NOT NULL UNIQUE,
+    email varchar(255) NOT NULL UNIQUE,
     password varchar(255) NOT NULL
 );
 
@@ -15,7 +15,7 @@ CREATE TABLE habits (
     times_completed int NOT NULL, 
     frequency_day int NOT NULL, 
     streak int NOT NULL,
-    username_id int
+    username_id int NOT NULL
     -- frequencyWeek int,
     -- startDate
 );
