@@ -19,3 +19,12 @@ CREATE TABLE habits (
     -- frequencyWeek int,
     -- startDate
 );
+
+DROP TABLE IF EXISTS badges;
+
+CREATE TABLE badges (
+    id serial PRIMARY KEY, 
+    badge_name varchar(50) NOT NULL,
+    username_id int NOT NULL 
+);
+

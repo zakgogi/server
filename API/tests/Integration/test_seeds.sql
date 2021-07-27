@@ -1,4 +1,4 @@
-TRUNCATE users, habits RESTART IDENTITY;
+TRUNCATE users, habits, badges RESTART IDENTITY;
 
 INSERT INTO users (username, email, password) 
 VALUES
@@ -11,3 +11,9 @@ VALUES
     ('Go to the gym', 2, 5, 15, 1),
     ('Read a book', 4, 5, 2, 1),
     ('Go for a walk', 1, 3, 3, 2);
+
+INSERT INTO badges (badge_name, username_id)
+VALUES
+    ('hot streak', 1),
+    ('great progress', 1),
+    ('habit master', 2);

@@ -9,3 +9,6 @@ VALUES
     ('Read a book', 3, 3, 4, 1),
     ('Go for a walk', 0, 2, 3, 2);
 
+INSERT INTO badges (badge_name, username_id)
+VALUES
+    ('hot streak', 1);
