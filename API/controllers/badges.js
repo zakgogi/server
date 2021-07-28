@@ -18,4 +18,5 @@ async function showUserBadges(req, res){
     }
 };
 
+
 module.exports = { show, showUserBadges };

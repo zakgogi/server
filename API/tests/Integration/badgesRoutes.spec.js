@@ -29,4 +29,5 @@ describe('badge endpoints', () => {
         expect(res.body.length).toEqual(2);
     });
 
+
 });

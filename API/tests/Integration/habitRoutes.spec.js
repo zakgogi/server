@@ -20,13 +20,13 @@ describe('habit endpoints', () => {
     it('should return a list of all habits in database', async () => {
         const res = await request(api).get('/habits');
         expect(res.statusCode).toEqual(200);
-        expect(res.body.length).toEqual(3);
+        expect(res.body.length).toEqual(5);
     });
     
     it('should return a list of habits of a specific users', async () => {
         const res = await request(api).get('/habits/1');
         expect(res.statusCode).toEqual(200);
-        expect(res.body.length).toEqual(2);
+        expect(res.body.length).toEqual(4);
     }); 
 
     it('should create a habit for a given user', async () => {
@@ -47,6 +47,43 @@ describe('habit endpoints', () => {
 
     });
 
+    it('should add a badge to a given user at first habit created', async () => {
+        const res = await request(api)
+            .post('/habits')
+            .send({
+                habitname: 'Drink some water',
+                times_completed: 0,
+                frequency_day: 3,
+                streak: 0,
+                username_id: 3
+            })
+        // console.log(res);
+        expect(res.statusCode).toEqual(201);
+        expect(res.body).toHaveProperty("id");
+        const badgeRes = await request(api).get('/badges/3');
+        expect(badgeRes.body.length).toEqual(1);
+
+    });
+
+    it('should add a badge to a given user at fifth habit created', async () => {
+        const res = await request(api)
+            .post('/habits')
+            .send({
+                habitname: 'Drink some water',
+                times_completed: 0,
+                frequency_day: 3,
+                streak: 0,
+                username_id: 1
+            })
+        // console.log(res);
+        expect(res.statusCode).toEqual(201);
+        expect(res.body).toHaveProperty("id");
+        const badgeRes = await request(api).get('/badges/1');
+        expect(badgeRes.body.length).toEqual(3);
+
+    });
+
+
     it('should delete a habit for a given user', async () => {
         const res = await request(api)
             .delete('/habits')
@@ -56,7 +93,7 @@ describe('habit endpoints', () => {
 
         expect(res.statusCode).toEqual(204);
         const habitRes = await request(api).get('/habits/1');
-        expect(habitRes.body.length).toEqual(1);
+        expect(habitRes.body.length).toEqual(3);
 
     });
 
@@ -99,6 +136,36 @@ describe('habit endpoints', () => {
         const habitRes = await request(api).get('/habits/1');
         expect(habitRes.body[habitRes.body.length - 1].times_completed).toEqual(5);
         expect(habitRes.body[habitRes.body.length - 1].streak).toEqual(3)
+
+    });
+
+    it('should add a badge to a given user when streak reaches 1', async () => {
+        const res = await request(api)
+            .patch('/habits')
+            .send({
+                id: 4,
+                times_completed: 8,
+                frequency_day: 8
+            })
+
+        expect(res.statusCode).toEqual(204);
+        const badgeRes = await request(api).get('/badges/1');
+        expect(badgeRes.body.length).toEqual(3);
+
+    });
+
+    it('should add a badge to a given user when streak reaches 7', async () => {
+        const res = await request(api)
+            .patch('/habits')
+            .send({
+                id: 3,
+                times_completed: 6,
+                frequency_day: 6
+            })
+
+        expect(res.statusCode).toEqual(204);
+        const badgeRes = await request(api).get('/badges/1');
+        expect(badgeRes.body.length).toEqual(3);
 
     });
 

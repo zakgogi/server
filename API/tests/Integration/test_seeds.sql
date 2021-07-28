@@ -10,6 +10,8 @@ INSERT INTO habits (habitname, times_completed, frequency_day, streak, username_
 VALUES
     ('Go to the gym', 2, 5, 15, 1),
     ('Read a book', 4, 5, 2, 1),
+    ('Go for a walk', 4, 5, 6, 1),
+    ('Drink some water', 7, 8, 0, 1),
     ('Go for a walk', 1, 3, 3, 2);
 
 INSERT INTO badges (badge_name, username_id)
