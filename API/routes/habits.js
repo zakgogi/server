@@ -7,7 +7,8 @@ router.get('/:id', habitsController.showUserHabits);
 router.post('/', habitsController.create);
 router.delete('/', habitsController.destroy);
 router.patch('/', habitsController.update);
-// router.get('/streak', habitsController.streakCheck);
+router.post('/email', habitsController.sendEmail);
+
 
 module.exports = router;
 

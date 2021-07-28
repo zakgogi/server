@@ -1,6 +1,7 @@
 const Habit = require('../models/habit');
 //To schedule a function running at midnight each day
 const cron = require('node-cron');
+const User = require('../models/users');
 
 async function show(req, res){
     try {
@@ -65,6 +66,16 @@ async function streakCheck(req, res){
     }
 }
 
+async function sendEmail(req, res){
+    try {
+        const user = await User.findByUsername(req.body.username);
+        const emailSend = await Habit.sendEmail({...req.body, email: user.email});
+        res.status(201).json({message: 'Email will be sent'})
+    } catch (err) {
+        res.status(422).json({err})
+    }
+}
 
 
-module.exports = { show, showUserHabits, create, destroy, update, streakCheck };
+
+module.exports = { show, showUserHabits, create, destroy, update, streakCheck, sendEmail };

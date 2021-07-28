@@ -1,5 +1,5 @@
 const db = require('../dbConfig');
-
+require('dotenv').config();
 module.exports = class Habit{
     constructor(data){
         this.id = data.id;
@@ -173,5 +173,29 @@ module.exports = class Habit{
             }
         })
     };
+
+    static sendEmail(data){
+        sgMail.setApiKey(proccess.env.SENDGRID_API_KEY);
+        const today = new Date();
+        const day = today.getDate();
+        const month = today.getMonth();
+        const year = today.getFullYear();
+        let date =  new Date(year, month, day, data.timeHour, data.timeMin);
+        let unixDate = date.getTime() / 1000;
+        console.log(data);
+        const msg = {
+            to: `${data.email}`,
+            from: 'stridereminderapp@gmail.com',
+            subject: `Reminder to ${data.habitname}`,
+            text: `Make sure you complete ${data.habitname} today!`,
+            html: `<p>Make sure you complete ${data.habitname} today!</p>`,
+            sendAt: unixDate
+        }
+        sgMail.send(msg).then(() => {
+            console.log('Email Sent');
+        }).catch((err) => {
+            console.error(err);
+        })
+    }
 
 };

@@ -166,7 +166,6 @@ describe('habit endpoints', () => {
         expect(res.statusCode).toEqual(204);
         const badgeRes = await request(api).get('/badges/1');
         expect(badgeRes.body.length).toEqual(3);
-
     });
 
 
