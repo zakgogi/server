@@ -1,5 +1,6 @@
 const db = require('../dbConfig');
 require('dotenv').config();
+const sgMail = require('@sendgrid/mail');
 module.exports = class Habit{
     constructor(data){
         this.id = data.id;
@@ -175,7 +176,8 @@ module.exports = class Habit{
     };
 
     static sendEmail(data){
-        sgMail.setApiKey(proccess.env.SENDGRID_API_KEY);
+        const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY.toString();
+        sgMail.setApiKey(SENDGRID_API_KEY);
         const today = new Date();
         const day = today.getDate();
         const month = today.getMonth();
@@ -192,7 +194,7 @@ module.exports = class Habit{
             sendAt: unixDate
         }
         sgMail.send(msg).then(() => {
-            console.log('Email Sent');
+            console.log('Email Request Sent');
         }).catch((err) => {
             console.error(err);
         })

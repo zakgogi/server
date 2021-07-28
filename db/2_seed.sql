@@ -1,7 +1,8 @@
 INSERT INTO users (username, email, password) 
 VALUES
     ('brogrammer', 'brogrammer@brogram.com', 'brobrobro'),
-    ('brogrammer2', 'brogrammer2@brogram.com', 'brobrobro2');
+    ('brogrammer2', 'brogrammer2@brogram.com', 'brobrobro2'),
+    ('zakemailtest', 'zakgogi1@gmail.com', 'test');
 
 INSERT INTO habits (habitname, times_completed, frequency_day, streak, username_id)
 VALUES
