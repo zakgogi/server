@@ -60,4 +60,4 @@ async function sendEmail(req, res){
 
 
 
-module.exports = { show, showUserHabits, create, destroy, update, streakCheck, sendEmail };
+module.exports = { show, showUserHabits, create, destroy, update, sendEmail };
