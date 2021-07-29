@@ -1,6 +1,4 @@
 const Habit = require('../models/habit');
-//To schedule a function running at midnight each day
-const cron = require('node-cron');
 const User = require('../models/users');
 
 async function show(req, res){
@@ -49,22 +47,6 @@ async function update(req, res){
     }
 };
 
-cron.schedule('59 23 * * *', () => {
-    console.log('Running a job at Midnight at UK timezone');
-    streakCheck();
-  }, {
-    scheduled: true,
-    timezone: "Europe/London"
-  });
-
-async function streakCheck(req, res){
-    try {
-        const habit = await Habit.streakCheck();
-        // res.status(204).json(habit);
-    } catch (err) {
-        // res.status(404).json({err});
-    }
-}
 
 async function sendEmail(req, res){
     try {
